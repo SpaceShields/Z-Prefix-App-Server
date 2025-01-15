@@ -153,7 +153,6 @@ Run all test cases with Jest:
 npm test
 ```
 
-- Test files are located in the `tests` directory.
 - Use the `.test.js` suffix for test files.
 
 ---
