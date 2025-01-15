@@ -26,14 +26,22 @@ This project is a RESTful API built using Node.js, Express, Prisma, and Jest. Th
    npm install
    ```
 
-3. **Set up the database**:
+3. **Environment Variables**
+
+    Create a `.env` file in the root of the project with the following keys:
+    ```env
+    DATABASE_URL=<your-database-connection-string>
+    PORT=5000
+    ```
+
+4. **Set up the database**:
    - Update the `DATABASE_URL` in the `.env` file with your database connection string.
    - Run the Prisma migrations to set up the database schema:
      ```bash
      npx prisma migrate dev
      ```
 
-4. **Run the development server**:
+5. **Run the development server**:
    ```bash
    npm run dev
    ```
@@ -92,16 +100,6 @@ This project is a RESTful API built using Node.js, Express, Prisma, and Jest. Th
 ├── .env               # Environment variables
 ├── package.json       # Project metadata and dependencies
 └── README.md          # Documentation
-```
-
----
-
-## Environment Variables
-
-Create a `.env` file in the root of the project with the following keys:
-```env
-DATABASE_URL=<your-database-connection-string>
-PORT=5000
 ```
 
 ---
