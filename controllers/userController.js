@@ -2,6 +2,8 @@ const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+// This is a prisma client extension that catches any create or update operations for a user
+// This query will catch those operations and use bcrypt to hash the password
 const prisma = new PrismaClient().$extends({
   query: {
     user: {
@@ -15,6 +17,9 @@ const prisma = new PrismaClient().$extends({
   }
 });
 
+
+// This controller function will use bcrypt to check the password against the hash password in the db
+// Then it will return an accessToken as a signed JWT
 exports.loginUser = async (req, res) => {
   try {
     const user = await prisma.user.findUnique({
@@ -37,6 +42,8 @@ exports.loginUser = async (req, res) => {
   }
 }
 
+// This controller function creates a new user, hashes the password
+// and returns the user data minus the password hash
 exports.createUser = async (req, res) => {
     try {
         if(!req.body.username) {
