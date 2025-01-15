@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const prisma = new PrismaClient().$extends({
   query: {
@@ -14,20 +15,26 @@ const prisma = new PrismaClient().$extends({
   }
 });
 
-async function checkUser(username, password) {
-  const user = await prisma.user.findUnique({
+exports.loginUser = async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({
       where: {
-          username
+          username: req.body.username
       }
-  })
+    });
 
-  const match = await bcrypt.compare(password, user.password);
+    const match = await bcrypt.compare(req.body.password, user.password);
 
-  if(match) {
-      //login
+    if(match) {
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+      return res.status(202).json({ accessToken: accessToken })
+    }
+
+    return res.status(400).json({ error: 'Password is incorrect' })
+
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
-
-  //...
 }
 
 exports.createUser = async (req, res) => {
@@ -57,6 +64,6 @@ exports.createUser = async (req, res) => {
         })
         
     } catch (error) {
-        return res.status(500).json({ error: error.message })
+        return res.status(500).json({ error: error.message });
     }
 }
