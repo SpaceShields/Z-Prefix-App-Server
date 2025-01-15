@@ -32,10 +32,11 @@ exports.loginUser = async (req, res) => {
 
     if(match) {
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-      return res.status(202).json({ accessToken: accessToken })
+      console.log(`${user.username} logged in`);
+      return res.status(202).json({ accessToken: accessToken });
     }
 
-    return res.status(400).json({ error: 'Password is incorrect' })
+    return res.status(400).json({ error: 'Password is incorrect' });
 
   } catch (error) {
     return res.status(500).json({ error: error.message });
