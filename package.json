@@ -11,6 +11,9 @@
     "start": "node src/server",
     "dev": "nodemon src/server"
   },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "dependencies": {
     "@prisma/client": "^6.2.1",
     "bcrypt": "^5.1.1",
@@ -21,9 +24,12 @@
     "pg": "^8.13.1"
   },
   "devDependencies": {
+    "@types/node": "^22.10.7",
     "@types/pg": "^8.11.10",
     "jest": "^29.7.0",
     "nodemon": "^3.1.9",
-    "prisma": "^6.2.1"
+    "prisma": "^6.2.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   }
 }
