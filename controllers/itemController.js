@@ -65,6 +65,14 @@ exports.readItemById = async (req, res) => {
         const item = await prisma.item.findUnique({
             where: {
                 id: id
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        username: true,
+                    }
+                }
             }
         });
 
