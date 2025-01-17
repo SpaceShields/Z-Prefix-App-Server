@@ -14,7 +14,6 @@ exports.readItemsByUser = async (req, res) => {
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
           if(err) return res.status(403);
           req.user = user;
-          console.log(`${user.username} was verified`);
       });
 
       if(req.user == undefined) {
@@ -106,7 +105,6 @@ exports.createItem = async (req, res) => {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if(err) return res.status(403);
             req.user = user;
-            console.log(`${user.username} was verified`);
         });
 
         if(req.user == undefined) {
@@ -155,7 +153,6 @@ exports.updateItem = async (req, res) => {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if(err) return res.status(403);
             req.user = user;
-            console.log(`${user.username} was verified`);
         });
 
         if(req.user == undefined) {
@@ -202,7 +199,6 @@ exports.deleteItem = async (req, res) => {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if(err) return res.status(403);
             req.user = user;
-            console.log(`${user.username} was verified`);
         });
 
         if(req.user == undefined) {
