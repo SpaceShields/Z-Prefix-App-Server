@@ -84,6 +84,25 @@ exports.readItemById = async (req, res) => {
     }
 }
 
+// This controller function will retrieve the items from a userId param
+exports.readItemsByUserId = async (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+
+        const items = await prisma.item.findMany({
+            where: {
+                userId: id
+            }
+        });
+
+        if(items.length == 0) return res.status(404).json({ error: 'No items found' });
+        return res.status(200).json(items);
+
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+}
+
 // This controller function will create a new item after validating the accessToken
 exports.createItem = async (req, res) => {
     try {
