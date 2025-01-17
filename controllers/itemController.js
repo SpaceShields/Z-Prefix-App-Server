@@ -92,6 +92,14 @@ exports.readItemsByUserId = async (req, res) => {
         const items = await prisma.item.findMany({
             where: {
                 userId: id
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        username: true,
+                    }
+                }
             }
         });
 
