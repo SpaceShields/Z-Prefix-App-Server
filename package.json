@@ -7,7 +7,7 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "start": "node src/server",
     "dev": "nodemon src/server"
   },
